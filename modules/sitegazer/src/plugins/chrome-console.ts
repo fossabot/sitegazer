@@ -10,12 +10,4 @@ import Issue from "../interfaces/Issue";
  * @param {Context} context - The context object passed from SiteGazer.
  * @returns {Promise<Issue[]>} The promise object of array of Issue.
  */
-export default (async (context: Context): Promise<Issue[]> => context.browserErrors.map(error => ({
-  pageURL: context.url,
-  fileURL: context.url, // TODO
-  deviceType: context.deviceType,
-  pluginName: "Chrome Console",
-  message: error.toString(),
-  line: 0,
-  column: 0,
-}))) as Plugin;
+export default (async (context: Context): Promise<Issue[]> => context.issues) as Plugin;
