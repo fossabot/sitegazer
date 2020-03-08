@@ -90,14 +90,26 @@ class SiteGazer {
         column: 0,
       });
     }).on("pageerror", err => {
+      // msg: e.g. " Error: Something is wrong in desktop site."
+      // stacktrace: e.g. "        at http://localhost:3456/:7:23"
+      const [ msg, stacktrace ] = err.message.split("\n");
+
+      const destructuredStacktrace = stacktrace
+        .trim() // "        at http://localhost:3456/:7:23" -> "at http://localhost:3456/:7:23"
+        .replace("at ", "") // "at http://localhost:3456/:7:23" -> "http://localhost:3456/:7:23"
+        .split(":"); // "http://localhost:3456/:7:23" -> [ "http", "//localhost", "3456/" "7", "23" ]
+      const column = parseInt(destructuredStacktrace.pop());
+      const line = parseInt(destructuredStacktrace.pop());
+      const fileURL = destructuredStacktrace.join(":");
+
       issues.push({
         pageURL: url,
-        fileURL: url,
+        fileURL,
         deviceType,
         pluginName: "Chrome Console",
-        message: err.toString(),
-        line: 0,
-        column: 0,
+        message: msg.trim(),
+        line,
+        column,
       });
     });
 

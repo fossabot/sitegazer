@@ -35,8 +35,8 @@ test("Chrome Console Plugin", async () => {
         url: `http://localhost:${port}/`,
         issues: [{
           pluginName: "Chrome Console",
-          line: 0,
-          column: 0,
+          line: 9,
+          column: 16,
           message: `Error: Error: Something is wrong in desktop site.\n    at http://localhost:${port}/:7:23`,
         }],
       }],
@@ -48,8 +48,8 @@ test("Chrome Console Plugin", async () => {
         url: `http://localhost:${port}/`,
         issues: [{
           pluginName: "Chrome Console",
-          line: 0,
-          column: 0,
+          line: 9,
+          column: 16,
           message: `Error: Error: Something is wrong in mobile site.\n    at http://localhost:${port}/:8:23`,
         }],
       }],
