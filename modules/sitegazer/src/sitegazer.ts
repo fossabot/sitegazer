@@ -73,7 +73,13 @@ class SiteGazer {
 
   private async loadPage(url: string, deviceType: string, userAgent: string): Promise<void> {
     const issues: Issue[] = [];
-    const onError = (err: Error): void => {
+
+    const browser = await puppeteer.launch();
+    const page = await browser.newPage();
+
+    page.setUserAgent(userAgent);
+
+    page.on("error", err => {
       issues.push({
         pageURL: url,
         fileURL: url,
@@ -83,14 +89,17 @@ class SiteGazer {
         line: 0,
         column: 0,
       });
-    };
-
-    const browser = await puppeteer.launch();
-    const page = await browser.newPage();
-
-    page.setUserAgent(userAgent);
-    page.on("pageerror", onError);
-    page.on("error", onError);
+    }).on("pageerror", err => {
+      issues.push({
+        pageURL: url,
+        fileURL: url,
+        deviceType,
+        pluginName: "Chrome Console",
+        message: err.toString(),
+        line: 0,
+        column: 0,
+      });
+    });
 
     try {
       const res = await page.goto(url);
