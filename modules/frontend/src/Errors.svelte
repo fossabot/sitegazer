@@ -9,7 +9,7 @@
       files: [
         {
           url: "https://example.org/example1",
-          errors: [
+          issues: [
             {
               pluginName: "Nu HTML Checker",
               message: "Consider adding a “lang” attribute to the “html” start tag to declare the language of this document.",
@@ -20,7 +20,7 @@
         },
         {
           url: "https://example.org/js/example1.js",
-          errors: [
+          issues: [
             {
               pluginName: "Chrome Console",
               message: "Type Error: Something went wrong.",
@@ -37,7 +37,7 @@
       files: [
         {
           url: "https://example.org/example2",
-          errors: [
+          issues: [
             {
               pluginName: "Nu HTML Checker",
               message: "Consider adding a “lang” attribute to the “html” start tag to declare the language of this document.",
@@ -65,16 +65,16 @@
         </div>
 
         {#each page.files as file}
-          {#each file.errors as error}
+          {#each file.issues as issue}
             <div class="error">
               <div class="error-container-l1">
                 <span class="error-msg">
                   <img src="/assets/vendor/fontawesome/exclamation-circle.svg" alt="Error" decoding="async">
-                  <h4>{error.message}</h4>
+                  <h4>{issue.message}</h4>
                 </span>
-                <span class="error-plugin-name">{error.pluginName}</span>
+                <span class="error-plugin-name">{issue.pluginName}</span>
               </div>
-              <span>{file.url} {error.line}:{error.column}</span>
+              <span>{file.url} {issue.line}:{issue.column}</span>
             </div>
           {/each}
         {/each}
