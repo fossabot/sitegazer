@@ -85,7 +85,7 @@ class SiteGazer {
         fileURL: url,
         deviceType,
         pluginName: null,
-        message: err.toString(),
+        message: err.message,
         line: 0,
         column: 0,
       });
