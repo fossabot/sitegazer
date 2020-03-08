@@ -15,7 +15,8 @@ export default (async (context: Context): Promise<Issue[]> => {
   const warnings = await vnu(context.html);
 
   return warnings.map(warning => ({
-    url: context.url,
+    pageURL: context.url,
+    fileURL: context.url,
     deviceType: context.deviceType,
     pluginName: "Nu HTML Checker",
     message: warning.message,

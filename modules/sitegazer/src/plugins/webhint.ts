@@ -30,7 +30,8 @@ export default (async (context: Context): Promise<Issue[]> => {
   for (const result of results) {
     for (const problem of result.problems) {
       issues.push({
-        url: result.url,
+        pageURL: result.url,
+        fileURL: result.url,
         deviceType: context.deviceType,
         pluginName: "WebHint",
         message: problem.message,

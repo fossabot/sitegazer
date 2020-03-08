@@ -29,7 +29,8 @@ test("Nu HTML Checker Plugin", async () => {
 
   expect(sortObjects(results)).toEqual(sortObjects([
     {
-      url: `http://localhost:${port}/`,
+      pageURL: `http://localhost:${port}/`,
+      fileURL: `http://localhost:${port}/`,
       deviceType: "desktop",
       pluginName: "Nu HTML Checker",
       line: 3,
@@ -37,7 +38,8 @@ test("Nu HTML Checker Plugin", async () => {
       message: "Consider adding a “lang” attribute to the “html” start tag to declare the language of this document.",
     },
     {
-      url: `http://localhost:${port}/`,
+      pageURL: `http://localhost:${port}/`,
+      fileURL: `http://localhost:${port}/`,
       deviceType: "mobile",
       pluginName: "Nu HTML Checker",
       line: 3,
@@ -46,7 +48,8 @@ test("Nu HTML Checker Plugin", async () => {
     },
     // This error message ensures that mobile user agent is properly working
     {
-      url: `http://localhost:${port}/`,
+      pageURL: `http://localhost:${port}/`,
+      fileURL: `http://localhost:${port}/`,
       deviceType: "mobile",
       pluginName: "Nu HTML Checker",
       line: 6,

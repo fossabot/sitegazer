@@ -29,7 +29,8 @@ test("Chrome Console Plugin", async () => {
 
   expect(sortObjects(results)).toEqual(sortObjects([
     {
-      url: `http://localhost:${port}/`,
+      pageURL: `http://localhost:${port}/`,
+      fileURL: `http://localhost:${port}/`,
       deviceType: "desktop",
       pluginName: "Chrome Console",
       line: 0,
@@ -37,7 +38,8 @@ test("Chrome Console Plugin", async () => {
       message: `Error: Error: Something is wrong in desktop site.\n    at http://localhost:${port}/:7:23`,
     },
     {
-      url: `http://localhost:${port}/`,
+      pageURL: `http://localhost:${port}/`,
+      fileURL: `http://localhost:${port}/`,
       deviceType: "mobile",
       pluginName: "Chrome Console",
       line: 0,

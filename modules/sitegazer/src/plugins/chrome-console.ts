@@ -11,7 +11,8 @@ import Issue from "../interfaces/Issue";
  * @returns {Promise<Issue[]>} The promise object of array of Issue.
  */
 export default (async (context: Context): Promise<Issue[]> => context.browserErrors.map(error => ({
-  url: context.url,
+  pageURL: context.url,
+  fileURL: context.url, // TODO
   deviceType: context.deviceType,
   pluginName: "Chrome Console",
   message: error.toString(),

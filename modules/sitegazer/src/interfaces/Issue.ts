@@ -1,7 +1,8 @@
 "use strict";
 
 export default interface Issue {
-  url: string;
+  pageURL: string;
+  fileURL: string;
   deviceType: string;
   pluginName: string;
   message: string;
