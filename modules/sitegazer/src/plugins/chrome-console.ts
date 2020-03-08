@@ -2,15 +2,15 @@
 
 import Context from "../interfaces/Context";
 import Plugin from "../interfaces/Plugin";
-import Warning from "../interfaces/Warning";
+import Issue from "../interfaces/Issue";
 
 /**
  * Find browser errors.
  *
  * @param {Context} context - The context object passed from SiteGazer.
- * @returns {Promise<Warning[]>} The promise object of array of Warning.
+ * @returns {Promise<Issue[]>} The promise object of array of Issue.
  */
-export default (async (context: Context): Promise<Warning[]> => context.browserErrors.map(error => ({
+export default (async (context: Context): Promise<Issue[]> => context.browserErrors.map(error => ({
   url: context.url,
   deviceType: context.deviceType,
   pluginName: "Chrome Console",

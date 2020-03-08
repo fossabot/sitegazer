@@ -3,15 +3,15 @@
 import { Analyzer } from "hint";
 import Context from "../interfaces/Context";
 import Plugin from "../interfaces/Plugin";
-import Warning from "../interfaces/Warning";
+import Issue from "../interfaces/Issue";
 
 /**
  * Lint with webhint.
  *
  * @param {Context} context - The context object passed from SiteGazer.
- * @returns {Promise<Warning[]>} The promise object of array of Warning.
+ * @returns {Promise<Issue[]>} The promise object of array of Issue.
  */
-export default (async (context: Context): Promise<Warning[]> => {
+export default (async (context: Context): Promise<Issue[]> => {
   const webhint: Analyzer = Analyzer.create({
     extends: [ "web-recommended" ],
     // connector: {
@@ -25,11 +25,11 @@ export default (async (context: Context): Promise<Warning[]> => {
     formatters: [],
   });
   const results = await webhint.analyze(context.url);
-  const warnings: Warning[] = [];
+  const issues: Issue[] = [];
 
   for (const result of results) {
     for (const problem of result.problems) {
-      warnings.push({
+      issues.push({
         url: result.url,
         deviceType: context.deviceType,
         pluginName: "WebHint",
@@ -40,5 +40,5 @@ export default (async (context: Context): Promise<Warning[]> => {
     }
   }
 
-  return warnings;
+  return issues;
 }) as Plugin;

@@ -3,15 +3,15 @@
 import { vnu } from "vnu";
 import Context from "../interfaces/Context";
 import Plugin from "../interfaces/Plugin";
-import Warning from "../interfaces/Warning";
+import Issue from "../interfaces/Issue";
 
 /**
  * Lint with Nu HTML Checker.
  *
  * @param {Context} context - The context object passed from SiteGazer.
- * @returns {Promise<Warning[]>} The promise object of array of Warning.
+ * @returns {Promise<Issue[]>} The promise object of array of Issue.
  */
-export default (async (context: Context): Promise<Warning[]> => {
+export default (async (context: Context): Promise<Issue[]> => {
   const warnings = await vnu(context.html);
 
   return warnings.map(warning => ({
