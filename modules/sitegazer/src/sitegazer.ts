@@ -79,7 +79,28 @@ class SiteGazer {
 
     page.setUserAgent(userAgent);
 
-    page.on("error", err => {
+    page.on("console", msg => {
+      const msgType = msg.type();
+
+      if (
+        msgType === "error" ||
+        msgType === "warning" ||
+        msgType === "assert" ||
+        msgType === "trace"
+      ) {
+        const location = msg.location();
+
+        return issues.push({
+          pageURL: url,
+          fileURL: location.url,
+          deviceType,
+          pluginName: "Chrome Console",
+          message: msg.text(),
+          line: location.lineNumber,
+          column: location.columnNumber,
+        });
+      }
+    }).on("error", err => {
       this.results.add({
         pageURL: url,
         fileURL: url,
@@ -110,6 +131,28 @@ class SiteGazer {
         message: msg.trim(),
         line,
         column,
+      });
+    }).on("requestfailed", req => {
+      issues.push({
+        pageURL: url,
+        fileURL: req.url(),
+        deviceType,
+        pluginName: "Chrome Console",
+        message: req.failure().errorText,
+        line: 0, // TODO
+        column: 0, // TODO
+      });
+    }).on("requestfinished", (req) => {
+      const res = req.response();
+
+      issues.push({
+        pageURL: url,
+        fileURL: req.url(),
+        deviceType,
+        pluginName: "Chrome Console",
+        message: `${res.status()} ${res.statusText()}`,
+        line: 0, // TODO
+        column: 0, // TODO
       });
     });
 
