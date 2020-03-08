@@ -80,11 +80,11 @@ class SiteGazer {
     page.setUserAgent(userAgent);
 
     page.on("error", err => {
-      issues.push({
+      this.results.add({
         pageURL: url,
         fileURL: url,
         deviceType,
-        pluginName: "Chrome Console",
+        pluginName: null,
         message: err.toString(),
         line: 0,
         column: 0,
